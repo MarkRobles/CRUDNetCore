@@ -1,0 +1,53 @@
+﻿@model IEnumerable<CRUDNetCore.Models.Inventario>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VchSku)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VchNumeroSerie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IntCantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnqGenproductoLinkNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VchSku)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VchNumeroSerie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IntCantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnqGenproductoLinkNavigation.VchDescripcion)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.UnqInvinventarioKey">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.UnqInvinventarioKey">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.UnqInvinventarioKey">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

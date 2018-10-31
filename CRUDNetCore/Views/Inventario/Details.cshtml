@@ -1,0 +1,42 @@
+﻿@model CRUDNetCore.Models.Inventario
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Inventario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VchSku)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VchSku)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VchNumeroSerie)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VchNumeroSerie)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IntCantidad)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IntCantidad)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UnqGenproductoLinkNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UnqGenproductoLinkNavigation.VchDescripcion)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.UnqInvinventarioKey">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
