@@ -56,7 +56,7 @@ namespace CRUDNetCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UnqGenproductoKey,VchDescripcion,UnqGensubCategoriaLink")] Producto producto)
+        public async Task<IActionResult> Create([Bind("UnqGenproductoKey,VchDescripcion,VchCodigo,UnqGensubCategoriaLink")] Producto producto)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace CRUDNetCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("UnqGenproductoKey,VchDescripcion,UnqGensubCategoriaLink")] Producto producto)
+        public async Task<IActionResult> Edit(Guid id, [Bind("UnqGenproductoKey,VchDescripcion,VchCodigo,UnqGensubCategoriaLink")] Producto producto)
         {
             if (id != producto.UnqGenproductoKey)
             {

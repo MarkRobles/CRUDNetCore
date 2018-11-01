@@ -16,6 +16,9 @@
                 @Html.DisplayNameFor(model => model.VchDescripcion)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.VchCodigo)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.UnqGensubCategoriaLinkNavigation)
             </th>
             <th></th>
@@ -26,6 +29,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.VchDescripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VchCodigo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UnqGensubCategoriaLinkNavigation.VchCodigo)

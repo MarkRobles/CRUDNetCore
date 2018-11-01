@@ -4,10 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Inventario</h2>
+
+<input type="button" value="Create" onclick="location.href='@Url.Action("Importar", "Inventario")'" />
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Nuevo registro de Inventario</a>
 </p>
 <table class="table">
     <thead>
@@ -28,26 +30,27 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.VchSku)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VchNumeroSerie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IntCantidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnqGenproductoLinkNavigation.VchDescripcion)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.UnqInvinventarioKey">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.UnqInvinventarioKey">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.UnqInvinventarioKey">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VchSku)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VchNumeroSerie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IntCantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnqGenproductoLinkNavigation.VchDescripcion)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.UnqInvinventarioKey">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.UnqInvinventarioKey">Ver Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.UnqInvinventarioKey">Borrar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

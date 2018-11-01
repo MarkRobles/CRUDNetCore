@@ -19,6 +19,11 @@
                 <span asp-validation-for="VchDescripcion" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="VchCodigo" class="control-label"></label>
+                <input asp-for="VchCodigo" class="form-control" />
+                <span asp-validation-for="VchCodigo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="UnqGensubCategoriaLink" class="control-label"></label>
                 <select asp-for="UnqGensubCategoriaLink" class="form-control" asp-items="ViewBag.UnqGensubCategoriaLink"></select>
                 <span asp-validation-for="UnqGensubCategoriaLink" class="text-danger"></span>
@@ -34,6 +39,3 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

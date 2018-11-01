@@ -12,6 +12,7 @@ namespace CRUDNetCore.Models
 
         public Guid UnqGenproductoKey { get; set; }
         public string VchDescripcion { get; set; }
+        public string VchCodigo { get; set; }
         public Guid UnqGensubCategoriaLink { get; set; }
 
         public SubCategoria UnqGensubCategoriaLinkNavigation { get; set; }

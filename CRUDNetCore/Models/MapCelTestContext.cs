@@ -99,6 +99,12 @@ namespace CRUDNetCore.Models
 
                 entity.Property(e => e.UnqGensubCategoriaLink).HasColumnName("unqGENSubCategoriaLink");
 
+                entity.Property(e => e.VchCodigo)
+                    .IsRequired()
+                    .HasColumnName("vchCodigo")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.VchDescripcion)
                     .IsRequired()
                     .HasColumnName("vchDescripcion")
