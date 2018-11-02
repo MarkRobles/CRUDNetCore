@@ -11,32 +11,32 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.VchSku)
+            @Html.DisplayNameFor(model => model.Sku)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.VchSku)
+            @Html.DisplayFor(model => model.Sku)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.VchNumeroSerie)
+            @Html.DisplayNameFor(model => model.NumeroSerie)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.VchNumeroSerie)
+            @Html.DisplayFor(model => model.NumeroSerie)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.IntCantidad)
+            @Html.DisplayNameFor(model => model.Cantidad)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.IntCantidad)
+            @Html.DisplayFor(model => model.Cantidad)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.UnqGenproductoLinkNavigation)
+            @Html.DisplayNameFor(model => model.IdproductoNavigation)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.UnqGenproductoLinkNavigation.VchDescripcion)
+            @Html.DisplayFor(model => model.IdproductoNavigation.Codigo)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.UnqInvinventarioKey">Editar</a> |
-    <a asp-action="Index">Regresar</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
 </div>

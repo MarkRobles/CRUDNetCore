@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CRUDNetCore.Models.Producto>
+﻿@model IEnumerable<CRUDNetCore.Models.SubCategoria>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,13 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Codigo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdsubCategoriaNavigation)
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdcategoriaNavigation)
             </th>
             <th></th>
         </tr>
@@ -28,13 +28,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Codigo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdsubCategoriaNavigation.Codigo)
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdcategoriaNavigation.Codigo)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

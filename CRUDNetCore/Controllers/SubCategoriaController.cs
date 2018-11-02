@@ -9,23 +9,23 @@ using CRUDNetCore.Models;
 
 namespace CRUDNetCore.Controllers
 {
-    public class SubCategoriasController : Controller
+    public class SubCategoriaController : Controller
     {
         private readonly MapCelTestContext _context;
 
-        public SubCategoriasController(MapCelTestContext context)
+        public SubCategoriaController(MapCelTestContext context)
         {
             _context = context;
         }
 
-        // GET: SubCategorias
+        // GET: SubCategoria
         public async Task<IActionResult> Index()
         {
-            var mapCelTestContext = _context.SubCategoria.Include(s => s.UnqGencategoriaLinkNavigation);
+            var mapCelTestContext = _context.SubCategoria.Include(s => s.IdcategoriaNavigation);
             return View(await mapCelTestContext.ToListAsync());
         }
 
-        // GET: SubCategorias/Details/5
+        // GET: SubCategoria/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -34,8 +34,8 @@ namespace CRUDNetCore.Controllers
             }
 
             var subCategoria = await _context.SubCategoria
-                .Include(s => s.UnqGencategoriaLinkNavigation)
-                .FirstOrDefaultAsync(m => m.UnqGensubCategoriaKey == id);
+                .Include(s => s.IdcategoriaNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (subCategoria == null)
             {
                 return NotFound();
@@ -44,32 +44,32 @@ namespace CRUDNetCore.Controllers
             return View(subCategoria);
         }
 
-        // GET: SubCategorias/Create
+        // GET: SubCategoria/Create
         public IActionResult Create()
         {
-            ViewData["UnqGencategoriaLink"] = new SelectList(_context.Categoria, "UnqGencategoriaKey", "VchCodigo");
+            ViewData["Idcategoria"] = new SelectList(_context.Categoria, "Id", "Codigo");
             return View();
         }
 
-        // POST: SubCategorias/Create
+        // POST: SubCategoria/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UnqGensubCategoriaKey,UnqGencategoriaLink,VchCodigo,VchDescripcion")] SubCategoria subCategoria)
+        public async Task<IActionResult> Create([Bind("Id,Idcategoria,Codigo,Descripcion")] SubCategoria subCategoria)
         {
             if (ModelState.IsValid)
             {
-                subCategoria.UnqGensubCategoriaKey = Guid.NewGuid();
+                subCategoria.Id = Guid.NewGuid();
                 _context.Add(subCategoria);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UnqGencategoriaLink"] = new SelectList(_context.Categoria, "UnqGencategoriaKey", "VchCodigo", subCategoria.UnqGencategoriaLink);
+            ViewData["Idcategoria"] = new SelectList(_context.Categoria, "Id", "Codigo", subCategoria.Idcategoria);
             return View(subCategoria);
         }
 
-        // GET: SubCategorias/Edit/5
+        // GET: SubCategoria/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -82,18 +82,18 @@ namespace CRUDNetCore.Controllers
             {
                 return NotFound();
             }
-            ViewData["UnqGencategoriaLink"] = new SelectList(_context.Categoria, "UnqGencategoriaKey", "VchCodigo", subCategoria.UnqGencategoriaLink);
+            ViewData["Idcategoria"] = new SelectList(_context.Categoria, "Id", "Codigo", subCategoria.Idcategoria);
             return View(subCategoria);
         }
 
-        // POST: SubCategorias/Edit/5
+        // POST: SubCategoria/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("UnqGensubCategoriaKey,UnqGencategoriaLink,VchCodigo,VchDescripcion")] SubCategoria subCategoria)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Idcategoria,Codigo,Descripcion")] SubCategoria subCategoria)
         {
-            if (id != subCategoria.UnqGensubCategoriaKey)
+            if (id != subCategoria.Id)
             {
                 return NotFound();
             }
@@ -107,7 +107,7 @@ namespace CRUDNetCore.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SubCategoriaExists(subCategoria.UnqGensubCategoriaKey))
+                    if (!SubCategoriaExists(subCategoria.Id))
                     {
                         return NotFound();
                     }
@@ -118,11 +118,11 @@ namespace CRUDNetCore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UnqGencategoriaLink"] = new SelectList(_context.Categoria, "UnqGencategoriaKey", "VchCodigo", subCategoria.UnqGencategoriaLink);
+            ViewData["Idcategoria"] = new SelectList(_context.Categoria, "Id", "Codigo", subCategoria.Idcategoria);
             return View(subCategoria);
         }
 
-        // GET: SubCategorias/Delete/5
+        // GET: SubCategoria/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -131,8 +131,8 @@ namespace CRUDNetCore.Controllers
             }
 
             var subCategoria = await _context.SubCategoria
-                .Include(s => s.UnqGencategoriaLinkNavigation)
-                .FirstOrDefaultAsync(m => m.UnqGensubCategoriaKey == id);
+                .Include(s => s.IdcategoriaNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (subCategoria == null)
             {
                 return NotFound();
@@ -141,7 +141,7 @@ namespace CRUDNetCore.Controllers
             return View(subCategoria);
         }
 
-        // POST: SubCategorias/Delete/5
+        // POST: SubCategoria/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -154,7 +154,7 @@ namespace CRUDNetCore.Controllers
 
         private bool SubCategoriaExists(Guid id)
         {
-            return _context.SubCategoria.Any(e => e.UnqGensubCategoriaKey == id);
+            return _context.SubCategoria.Any(e => e.Id == id);
         }
     }
 }

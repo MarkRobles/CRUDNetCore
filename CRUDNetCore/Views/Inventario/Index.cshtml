@@ -1,54 +1,69 @@
 ﻿@model IEnumerable<CRUDNetCore.Models.Inventario>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Inventario";
 }
 
-<h2>Inventario</h2>
+<h2>
+    Inventario
+</h2>
+@using (Html.BeginForm("Index", "Inventario", FormMethod.Get))
+{
+    <b>Buscar por:</b>
+    @Html.RadioButton("BuscarPor", "SKU", true)<text>SKU</text>
+    @Html.RadioButton("BuscarPor", "NumeroSerie", true)<text>Número de serie</text>
+    <br />
+    @Html.TextBox("Buscar")<input type="submit" value="Buscar" />
+}
 
-<input type="button" value="Create" onclick="location.href='@Url.Action("Importar", "Inventario")'" />
+
+
 
 <p>
-    <a asp-action="Create">Nuevo registro de Inventario</a>
+    <a asp-action="Create">Crear Nuevo</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.VchSku)
+                @Html.DisplayNameFor(model => model.Sku)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VchNumeroSerie)
+                @Html.DisplayNameFor(model => model.NumeroSerie)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IntCantidad)
+                @Html.DisplayNameFor(model => model.Cantidad)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UnqGenproductoLinkNavigation)
+                @Html.DisplayNameFor(model => model.IdproductoNavigation)
             </th>
             <th></th>
         </tr>
+        @if(Model.Count()==0)
+        {
+            <tr><td colspan="4" align="center">No se encontraron resultados</td></tr>
+        }
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.VchSku)
+                    @Html.DisplayFor(modelItem => item.Sku)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.VchNumeroSerie)
+                    @Html.DisplayFor(modelItem => item.NumeroSerie)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IntCantidad)
+                    @Html.DisplayFor(modelItem => item.Cantidad)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UnqGenproductoLinkNavigation.VchDescripcion)
+                    @Html.DisplayFor(modelItem => item.IdproductoNavigation.Codigo)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.UnqInvinventarioKey">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.UnqInvinventarioKey">Ver Detalles</a> |
-                    <a asp-action="Delete" asp-route-id="@item.UnqInvinventarioKey">Borrar</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Borrar</a>
                 </td>
             </tr>
         }

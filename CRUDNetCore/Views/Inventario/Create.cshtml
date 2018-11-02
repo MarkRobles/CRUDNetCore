@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Crear</h2>
+<h2>Create</h2>
 
 <h4>Inventario</h4>
 <hr />
@@ -13,23 +13,23 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="VchSku" class="control-label"></label>
-                <input asp-for="VchSku" class="form-control" />
-                <span asp-validation-for="VchSku" class="text-danger"></span>
+                <label asp-for="Sku" class="control-label"></label>
+                <input asp-for="Sku" class="form-control" />
+                <span asp-validation-for="Sku" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="VchNumeroSerie" class="control-label"></label>
-                <input asp-for="VchNumeroSerie" class="form-control" />
-                <span asp-validation-for="VchNumeroSerie" class="text-danger"></span>
+                <label asp-for="NumeroSerie" class="control-label"></label>
+                <input asp-for="NumeroSerie" class="form-control" />
+                <span asp-validation-for="NumeroSerie" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IntCantidad" class="control-label"></label>
-                <input asp-for="IntCantidad" class="form-control" />
-                <span asp-validation-for="IntCantidad" class="text-danger"></span>
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input asp-for="Cantidad" class="form-control" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UnqGenproductoLink" class="control-label"></label>
-                <select asp-for="UnqGenproductoLink" class ="form-control" asp-items="ViewBag.UnqGenproductoLink"></select>
+                <label asp-for="Idproducto" class="control-label"></label>
+                <select asp-for="Idproducto" class ="form-control" asp-items="ViewBag.Idproducto"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -42,6 +42,3 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

@@ -21,7 +21,7 @@ namespace CRUDNetCore.Controllers
         // GET: Producto
         public async Task<IActionResult> Index()
         {
-            var mapCelTestContext = _context.Producto.Include(p => p.UnqGensubCategoriaLinkNavigation);
+            var mapCelTestContext = _context.Producto.Include(p => p.IdsubCategoriaNavigation);
             return View(await mapCelTestContext.ToListAsync());
         }
 
@@ -34,8 +34,8 @@ namespace CRUDNetCore.Controllers
             }
 
             var producto = await _context.Producto
-                .Include(p => p.UnqGensubCategoriaLinkNavigation)
-                .FirstOrDefaultAsync(m => m.UnqGenproductoKey == id);
+                .Include(p => p.IdsubCategoriaNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (producto == null)
             {
                 return NotFound();
@@ -47,7 +47,7 @@ namespace CRUDNetCore.Controllers
         // GET: Producto/Create
         public IActionResult Create()
         {
-            ViewData["UnqGensubCategoriaLink"] = new SelectList(_context.SubCategoria, "UnqGensubCategoriaKey", "VchCodigo");
+            ViewData["IdsubCategoria"] = new SelectList(_context.SubCategoria, "Id", "Codigo");
             return View();
         }
 
@@ -56,16 +56,16 @@ namespace CRUDNetCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UnqGenproductoKey,VchDescripcion,VchCodigo,UnqGensubCategoriaLink")] Producto producto)
+        public async Task<IActionResult> Create([Bind("Id,Descripcion,Codigo,IdsubCategoria")] Producto producto)
         {
             if (ModelState.IsValid)
             {
-                producto.UnqGenproductoKey = Guid.NewGuid();
+                producto.Id = Guid.NewGuid();
                 _context.Add(producto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UnqGensubCategoriaLink"] = new SelectList(_context.SubCategoria, "UnqGensubCategoriaKey", "VchCodigo", producto.UnqGensubCategoriaLink);
+            ViewData["IdsubCategoria"] = new SelectList(_context.SubCategoria, "Id", "Codigo", producto.IdsubCategoria);
             return View(producto);
         }
 
@@ -82,7 +82,7 @@ namespace CRUDNetCore.Controllers
             {
                 return NotFound();
             }
-            ViewData["UnqGensubCategoriaLink"] = new SelectList(_context.SubCategoria, "UnqGensubCategoriaKey", "VchCodigo", producto.UnqGensubCategoriaLink);
+            ViewData["IdsubCategoria"] = new SelectList(_context.SubCategoria, "Id", "Codigo", producto.IdsubCategoria);
             return View(producto);
         }
 
@@ -91,9 +91,9 @@ namespace CRUDNetCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("UnqGenproductoKey,VchDescripcion,VchCodigo,UnqGensubCategoriaLink")] Producto producto)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Descripcion,Codigo,IdsubCategoria")] Producto producto)
         {
-            if (id != producto.UnqGenproductoKey)
+            if (id != producto.Id)
             {
                 return NotFound();
             }
@@ -107,7 +107,7 @@ namespace CRUDNetCore.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductoExists(producto.UnqGenproductoKey))
+                    if (!ProductoExists(producto.Id))
                     {
                         return NotFound();
                     }
@@ -118,7 +118,7 @@ namespace CRUDNetCore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UnqGensubCategoriaLink"] = new SelectList(_context.SubCategoria, "UnqGensubCategoriaKey", "VchCodigo", producto.UnqGensubCategoriaLink);
+            ViewData["IdsubCategoria"] = new SelectList(_context.SubCategoria, "Id", "Codigo", producto.IdsubCategoria);
             return View(producto);
         }
 
@@ -131,8 +131,8 @@ namespace CRUDNetCore.Controllers
             }
 
             var producto = await _context.Producto
-                .Include(p => p.UnqGensubCategoriaLinkNavigation)
-                .FirstOrDefaultAsync(m => m.UnqGenproductoKey == id);
+                .Include(p => p.IdsubCategoriaNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (producto == null)
             {
                 return NotFound();
@@ -154,7 +154,7 @@ namespace CRUDNetCore.Controllers
 
         private bool ProductoExists(Guid id)
         {
-            return _context.Producto.Any(e => e.UnqGenproductoKey == id);
+            return _context.Producto.Any(e => e.Id == id);
         }
     }
 }

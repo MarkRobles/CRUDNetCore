@@ -6,25 +6,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CRUDNetCore.Models;
+using System.Diagnostics;
 
 namespace CRUDNetCore.Controllers
 {
-    public class CategoriasController : Controller
+    public class CategoriaController : Controller
     {
         private readonly MapCelTestContext _context;
 
-        public CategoriasController(MapCelTestContext context)
+        public CategoriaController(MapCelTestContext context)
         {
             _context = context;
         }
 
-        // GET: Categorias
+        // GET: Categoria
         public async Task<IActionResult> Index()
         {
             return View(await _context.Categoria.ToListAsync());
         }
 
-        // GET: Categorias/Details/5
+        // GET: Categoria/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -33,7 +34,7 @@ namespace CRUDNetCore.Controllers
             }
 
             var categoria = await _context.Categoria
-                .FirstOrDefaultAsync(m => m.UnqGencategoriaKey == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (categoria == null)
             {
                 return NotFound();
@@ -42,30 +43,48 @@ namespace CRUDNetCore.Controllers
             return View(categoria);
         }
 
-        // GET: Categorias/Create
+        // GET: Categoria/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Categorias/Create
+        // POST: Categoria/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UnqGencategoriaKey,VchCodigo,VchDescripcion")] Categoria categoria)
+        public async Task<IActionResult> Create([Bind("Id,Codigo,Descripcion")] Categoria categoria)
         {
             if (ModelState.IsValid)
             {
-                categoria.UnqGencategoriaKey = Guid.NewGuid();
+                categoria.Id = Guid.NewGuid();
+
+                //var _producto = _context.Producto.Single(b => b.Codigo == CodigoProducto);
+
+                //objInventario.Idproducto = _producto.Id;
+
+                var _categoria = await _context.Categoria.SingleAsync(x => x.Codigo == "1" );
+                if (_categoria != null) {
+                    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                }
+
+                 _categoria = await _context.Categoria.SingleAsync(x => x.Descripcion == categoria.Descripcion);
+                if (_categoria != null)
+                {
+                    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                }
+
                 _context.Add(categoria);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
+
             }
             return View(categoria);
         }
 
-        // GET: Categorias/Edit/5
+        // GET: Categoria/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -81,14 +100,14 @@ namespace CRUDNetCore.Controllers
             return View(categoria);
         }
 
-        // POST: Categorias/Edit/5
+        // POST: Categoria/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("UnqGencategoriaKey,VchCodigo,VchDescripcion")] Categoria categoria)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Codigo,Descripcion")] Categoria categoria)
         {
-            if (id != categoria.UnqGencategoriaKey)
+            if (id != categoria.Id)
             {
                 return NotFound();
             }
@@ -102,7 +121,7 @@ namespace CRUDNetCore.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoriaExists(categoria.UnqGencategoriaKey))
+                    if (!CategoriaExists(categoria.Id))
                     {
                         return NotFound();
                     }
@@ -116,7 +135,7 @@ namespace CRUDNetCore.Controllers
             return View(categoria);
         }
 
-        // GET: Categorias/Delete/5
+        // GET: Categoria/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -125,7 +144,7 @@ namespace CRUDNetCore.Controllers
             }
 
             var categoria = await _context.Categoria
-                .FirstOrDefaultAsync(m => m.UnqGencategoriaKey == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (categoria == null)
             {
                 return NotFound();
@@ -134,7 +153,7 @@ namespace CRUDNetCore.Controllers
             return View(categoria);
         }
 
-        // POST: Categorias/Delete/5
+        // POST: Categoria/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -147,7 +166,7 @@ namespace CRUDNetCore.Controllers
 
         private bool CategoriaExists(Guid id)
         {
-            return _context.Categoria.Any(e => e.UnqGencategoriaKey == id);
+            return _context.Categoria.Any(e => e.Id == id);
         }
     }
 }

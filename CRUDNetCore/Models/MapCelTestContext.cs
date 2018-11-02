@@ -33,118 +33,101 @@ namespace CRUDNetCore.Models
         {
             modelBuilder.Entity<Categoria>(entity =>
             {
-                entity.HasKey(e => e.UnqGencategoriaKey);
-
                 entity.ToTable("Categoria", "GEN");
 
-                entity.Property(e => e.UnqGencategoriaKey)
-                    .HasColumnName("unqGENCategoriaKey")
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
                     .HasDefaultValueSql("(newsequentialid())");
 
-                entity.Property(e => e.VchCodigo)
+                entity.Property(e => e.Codigo)
                     .IsRequired()
-                    .HasColumnName("vchCodigo")
-                    .HasMaxLength(10)
+                    .HasMaxLength(5)
                     .IsUnicode(false);
 
-                entity.Property(e => e.VchDescripcion)
+                entity.Property(e => e.Descripcion)
                     .IsRequired()
-                    .HasColumnName("vchDescripcion")
                     .HasMaxLength(40)
                     .IsUnicode(false);
             });
 
             modelBuilder.Entity<Inventario>(entity =>
             {
-                entity.HasKey(e => e.UnqInvinventarioKey);
-
                 entity.ToTable("Inventario", "INV");
 
-                entity.Property(e => e.UnqInvinventarioKey)
-                    .HasColumnName("unqINVInventarioKey")
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
                     .HasDefaultValueSql("(newsequentialid())");
 
-                entity.Property(e => e.IntCantidad).HasColumnName("intCantidad");
+                entity.Property(e => e.Idproducto).HasColumnName("IDProducto");
 
-                entity.Property(e => e.UnqGenproductoLink).HasColumnName("unqGENProductoLink");
-
-                entity.Property(e => e.VchNumeroSerie)
+                entity.Property(e => e.NumeroSerie)
                     .IsRequired()
-                    .HasColumnName("vchNumeroSerie")
-                    .HasMaxLength(100)
+                    .HasMaxLength(40)
                     .IsUnicode(false);
 
-                entity.Property(e => e.VchSku)
+                entity.Property(e => e.Sku)
                     .IsRequired()
-                    .HasColumnName("vchSKU")
-                    .HasMaxLength(50)
+                    .HasColumnName("SKU")
+                    .HasMaxLength(5)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.UnqGenproductoLinkNavigation)
+                entity.HasOne(d => d.IdproductoNavigation)
                     .WithMany(p => p.Inventario)
-                    .HasForeignKey(d => d.UnqGenproductoLink)
+                    .HasForeignKey(d => d.Idproducto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_INVInventario_GENProducto");
             });
 
             modelBuilder.Entity<Producto>(entity =>
             {
-                entity.HasKey(e => e.UnqGenproductoKey);
-
                 entity.ToTable("Producto", "GEN");
 
-                entity.Property(e => e.UnqGenproductoKey)
-                    .HasColumnName("unqGENProductoKey")
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
                     .HasDefaultValueSql("(newsequentialid())");
 
-                entity.Property(e => e.UnqGensubCategoriaLink).HasColumnName("unqGENSubCategoriaLink");
-
-                entity.Property(e => e.VchCodigo)
+                entity.Property(e => e.Codigo)
                     .IsRequired()
-                    .HasColumnName("vchCodigo")
-                    .HasMaxLength(50)
+                    .HasMaxLength(5)
                     .IsUnicode(false);
 
-                entity.Property(e => e.VchDescripcion)
+                entity.Property(e => e.Descripcion)
                     .IsRequired()
-                    .HasColumnName("vchDescripcion")
-                    .HasMaxLength(100)
+                    .HasMaxLength(40)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.UnqGensubCategoriaLinkNavigation)
+                entity.Property(e => e.IdsubCategoria).HasColumnName("IDSubCategoria");
+
+                entity.HasOne(d => d.IdsubCategoriaNavigation)
                     .WithMany(p => p.Producto)
-                    .HasForeignKey(d => d.UnqGensubCategoriaLink)
+                    .HasForeignKey(d => d.IdsubCategoria)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_GENProducto_GENSubCategoria");
             });
 
             modelBuilder.Entity<SubCategoria>(entity =>
             {
-                entity.HasKey(e => e.UnqGensubCategoriaKey);
-
                 entity.ToTable("SubCategoria", "GEN");
 
-                entity.Property(e => e.UnqGensubCategoriaKey)
-                    .HasColumnName("unqGENSubCategoriaKey")
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
                     .HasDefaultValueSql("(newsequentialid())");
 
-                entity.Property(e => e.UnqGencategoriaLink).HasColumnName("unqGENCategoriaLink");
-
-                entity.Property(e => e.VchCodigo)
+                entity.Property(e => e.Codigo)
                     .IsRequired()
-                    .HasColumnName("vchCodigo")
-                    .HasMaxLength(10)
+                    .HasMaxLength(5)
                     .IsUnicode(false);
 
-                entity.Property(e => e.VchDescripcion)
+                entity.Property(e => e.Descripcion)
                     .IsRequired()
-                    .HasColumnName("vchDescripcion")
                     .HasMaxLength(40)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.UnqGencategoriaLinkNavigation)
+                entity.Property(e => e.Idcategoria).HasColumnName("IDCategoria");
+
+                entity.HasOne(d => d.IdcategoriaNavigation)
                     .WithMany(p => p.SubCategoria)
-                    .HasForeignKey(d => d.UnqGencategoriaLink)
+                    .HasForeignKey(d => d.Idcategoria)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_GENSubCategoria_GENCategoria");
             });

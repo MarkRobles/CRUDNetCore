@@ -4,42 +4,42 @@
     ViewData["Title"] = "Delete";
 }
 
-<h2>Eliminar</h2>
+<h2>Delete</h2>
 
-<h3>Estas seguro que deseas eliminar?</h3>
+<h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>Inventario</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.VchSku)
+            @Html.DisplayNameFor(model => model.Sku)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.VchSku)
+            @Html.DisplayFor(model => model.Sku)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.VchNumeroSerie)
+            @Html.DisplayNameFor(model => model.NumeroSerie)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.VchNumeroSerie)
+            @Html.DisplayFor(model => model.NumeroSerie)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.IntCantidad)
+            @Html.DisplayNameFor(model => model.Cantidad)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.IntCantidad)
+            @Html.DisplayFor(model => model.Cantidad)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.UnqGenproductoLinkNavigation)
+            @Html.DisplayNameFor(model => model.IdproductoNavigation)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.UnqGenproductoLinkNavigation.VchDescripcion)
+            @Html.DisplayFor(model => model.IdproductoNavigation.Codigo)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="UnqInvinventarioKey" />
+        <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Regresar</a>
+        <a asp-action="Index">Back to List</a>
     </form>
 </div>
