@@ -135,7 +135,15 @@ namespace CRUDNetCore.Controllers
 
                 //}
 
-                return View(await _context.Inventario.Where(x => x.Sku == Buscar || x.NumeroSerie == Buscar || x.Sku == null || x.NumeroSerie == null).ToListAsync());
+
+
+                var query = from Inv in _context.Inventario
+                            where EF.Functions.Like(Inv.Sku, "%" + Buscar + "%") || Buscar == null || EF.Functions.Like(Inv.NumeroSerie, "%" + Buscar + "%") || Buscar == null
+                            select Inv;
+                return View(query.ToList());
+
+
+               // return View(await _context.Inventario.Where(x => x.Sku == Buscar || x.NumeroSerie == Buscar || x.Sku == null || x.NumeroSerie == null).ToListAsync());
 
             }
 
